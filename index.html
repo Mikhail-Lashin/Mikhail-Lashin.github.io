@@ -114,8 +114,7 @@
         }
         
         .media-item {
-            flex: 1 1 300px;
-            height: 200px;
+            aspect-ratio: 1 / 1;
             border-radius: 4px;
             overflow: hidden;
         }
@@ -170,7 +169,7 @@
             }
         }
         /* =============================================================== */
-        /* АДАПТИВНОСТЬ ДЛЯ БОЛЬШИХ ЭКРАНОВ (Две колонки)                  */
+        /* АДАПТИВНОСТЬ ДЛЯ БОЛЬШШИХ ЭКРАНОВ (Две колонки)                  */
         /* =============================================================== */
         @media (min-width: 1024px) { /* Эти стили сработают, только если экран шире 1024px */
 
@@ -186,15 +185,16 @@
                 width: calc(50% - 20px); 
                 margin-bottom: 0; /* отступ снизу не нужен, т.к. есть gap */
             }
+        }
             
         .add-space-top {
             margin-top: 1.5em; /* добавить отступ сверху в 25 пикселей */
         }
 
         /* =============================================================== */
-        /* Стили для скрытой галереи                                       */
+        /* Стили для скрытой галереи и кнопки                             */
         /* =============================================================== */
-
+        
         /* по умолчанию прячем галерею */
         .additional-media {
             /* убрать высоту и отступы */
@@ -215,14 +215,14 @@
             max-height: 1000px; /* большое значение, чтобы точно хватило */
             margin: 20px 0;
         }
-
-        }
     </style>
 </head>
 <body>
     <header>
         <div class="container">
             <h1>Мои проекты</h1>
+            <p>Лашин Михаил</p>
+            <p>НИЯУ МИФИ</p>
         </div>
     </header>
     
@@ -230,21 +230,20 @@
         <!-- СИСТЕМА ВИЗУАЛЬНОГО ПОЗИЦИОНИРОВАНИЯ -->
         <div class="project">
             <!-- Главное фото проекта -->
-            <img src="images\CV_main_render.JPG" alt="Низколатентная система визуального позиционирования" class="project-image">
+            <img src="images/CV_main_render.JPG" alt="Низколатентная система визуального позиционирования" class="project-image">
             <div class="project-content">
                 <h2 class="project-title">Низколатентная система визуального позиционирования</h2>
                 <div class="project-description">
                     <p>
-                        <span class="bold underline">Задача:</span> разработать аппаратную систему, способную в реальном времени детектировать и отслеживать динамические цели на экране и управлять 2D-платформой на кинематике H-bot для точной корректировки движения компьютерной мыши. Тестовая среда — Aimlabs, CS2, Valorant.
+                        <span class="bold underline">Задача:</span> разработать аппаратную систему, способную в реальном времени детектировать и отслеживать динамические цели на экране и управлять 2D-платформой на кинематике H-bot для точной корректировки движения компьютерной мыши. Тестовая среда — Aimlabs, CS2, Valorant
                     </p>
                     
-
                     <p class="bold add-space-top underline">Ключевые особенности:</p>
                     <ul>
                         <li><span class="bold">Аппаратная изоляция:</span> любое программное взаимодействие с хост-компьютером исключено</li>
-                        <li><span class="bold">CAD/CAE:</span> SolidWorks, Topological Optimization</li>
-                        <li><span class="bold">ПО:</span> C++, Python, OpenCV, Git</li>
-                        <li><span class="bold">Электроника:</span> Raspberry Pi 5, STM32, Stepper Motors</li>
+                        <li><span class="bold">CAD:</span> SolidWorks</li>
+                        <li><span class="bold">ПО:</span> C++, Python, OpenCV, Git, VScode</li>
+                        <li><span class="bold">Электроника:</span> RPi 5, RPi camera, STM32, Nema 17, TMC2209</li>
                         <li><span class="bold">Производство:</span> Лазерная резка (алюминий, сталь), 3D-печать</li>
                     </ul>
                 </div>
@@ -285,17 +284,15 @@
                 <div class="project-description">
                     <p>
                         <span class="bold underline">Задача:</span> Спроектировать крупноформатный (800x800 мм) лазерный станок
-
                     </p>
                     
-
                     <p class="bold add-space-top underline">Ключевые особенности:</p>
                     <ul>
                         <li><span class="bold">Кастомные узлы:</span> все ключевые компоненты (каретки, корпус для электроники и т.д.) спроектированы в Компас-3D и изготовлены методом FDM-печати для адаптации конструкции под выбранные комплектующие.</li>
                         <li><span class="bold">Активная доработка:</span> ведется проектирование защитного корпуса со встроенной вытяжкой для повышения безопасности и расширения спектра обрабатываемых материалов.</li>
-                        <li><span class="bold">CAD:</span> Компас-3D</li>
-                        <li><span class="bold">Управление:</span> MKS DLC 32, GRBL, Nema 17</li>
+                        <li><span class="bold">CAD:</span> Компас-3D (проектирование), SolidWorks (рендер)</li>
                         <li><span class="bold">ПО:</span> LightBurn, LaserGRBL</li>
+                        <li><span class="bold">Электроника:</span> MKS DLC 32, Nema 17, A4988</li>
                         <li><span class="bold">Производство:</span> 3D-печать, слесарная сборка</li>
                     </ul>
                 </div>
@@ -330,7 +327,58 @@
                 <div class="project-links">
                     <a href="#" id="project2-btn" class="project-link">Галерея</a>
                     <a href="https://vk.com/video507846758_456239096" target="_blank" class="project-link">Видео с демонстрацией</a>
-                    <a href="#" class="project-link">GitHub (если будет)</a>
+                    <a href="https://habr.com/ru/articles/907868/?ysclid=mf7anx5k86968356154" target="_blank" class="project-link">Статья (Хабр)</a>
+                </div>
+            </div>
+        </div>
+        <!-- Конец проекта-->
+
+        <!-- РОБОТ-ПОГРУЗЧИК -->
+        <div class="project">
+            <!-- Главное фото проекта -->
+            <img src="images/PP_compas_1.png" alt="Робот-погрузчик" class="project-image">
+            <div class="project-content">
+                <h2 class="project-title">Робот-погрузчик</h2>
+                <div class="project-description">
+                    <p>
+                        <span class="bold underline">Задача:</span> Создать миниатюрного робота-погрузчика для инженерных игр, способного распознавать цвет грузов, осуществлять их захват, перевозку и подъем на заданную высоту для сброса
+                    </p>
+                    
+                    <p class="bold add-space-top underline">Ключевые особенности:</p>
+                    <ul>
+                        <li><span class="bold">CAD:</span> Компас-3D</li>
+                        <li><span class="bold">ПО:</span> MicroPython, VScode, Arduino IDE</li>
+                        <li><span class="bold">Электроника:</span> ESP32, color sensor RGB, servo MG90S</li>
+                        <li><span class="bold">Производство:</span> 3D-печать</li>
+                    </ul>
+                </div>
+                
+                <div id="project3-gallery" class="additional-media">
+                    <a href="images/PP_photo.jpg" class="media-item">
+                        <img src="images/PP_photo.jpg" alt="Фото робота">
+                    </a>
+                    <a href="images/PP_poster.png" class="media-item">
+                        <img src="images/PP_poster.png" alt="Постер проекта">
+                    </a>
+                    <a href="images/PP_compas_1.png" class="media-item">
+                        <img src="images/PP_compas_1.png" alt="Чертеж 1">
+                    </a>
+                    <a href="images/PP_compas_2.png" class="media-item">
+                        <img src="images/PP_compas_2.png" alt="Чертеж 2">
+                    </a>
+                    <a href="images/PP_compas_3.png" class="media-item">
+                        <img src="images/PP_compas_3.png" alt="Чертеж 3">
+                    </a>
+                    <a href="images/PP_compas_4.png" class="media-item">
+                        <img src="images/PP_compas_4.png" alt="Чертеж 4">
+                    </a>
+                    <a href="images/PP_compas_5.png" class="media-item">
+                        <img src="images/PP_compas_5.png" alt="Чертеж 5">
+                    </a>
+                </div>
+                
+                <div class="project-links">
+                    <a href="#" id="project3-btn" class="project-link">Галерея</a>
                 </div>
             </div>
         </div>
@@ -358,49 +406,46 @@
         window.addEventListener('load', function() {
             
             // --- Сначала активируем галерею ---
-            // Эта команда найдет все галереи и сделает их кликабельными
             baguetteBox.run('.additional-media', {
-                animation: 'fadeIn' // красивая анимация появления
+                animation: 'fadeIn'
             });
 
-
-            // --- Теперь "оживляем" кнопку для Проекта 1 ---
+            // --- "Оживляем" кнопку для Проекта 1 ---
             const toggleBtn1 = document.getElementById('project1-btn');
             const gallery1 = document.getElementById('project1-gallery');
 
             if (toggleBtn1 && gallery1) {
                 toggleBtn1.addEventListener('click', function(event) {
                     event.preventDefault();
-                    
                     gallery1.classList.toggle('gallery-visible');
-
-                    if (gallery1.classList.contains('gallery-visible')) {
-                        toggleBtn1.textContent = 'Скрыть';
-                    } else {
-                        toggleBtn1.textContent = 'Галерея';
-                    }
+                    toggleBtn1.textContent = gallery1.classList.contains('gallery-visible') ? 'Скрыть' : 'Галерея';
                 });
             }
 
-            // --- Теперь "оживляем" кнопку для Проекта 2 ---
+            // --- "Оживляем" кнопку для Проекта 2 ---
             const toggleBtn2 = document.getElementById('project2-btn');
             const gallery2 = document.getElementById('project2-gallery');
 
             if (toggleBtn2 && gallery2) {
                 toggleBtn2.addEventListener('click', function(event) {
                     event.preventDefault();
-                    
                     gallery2.classList.toggle('gallery-visible');
+                    toggleBtn2.textContent = gallery2.classList.contains('gallery-visible') ? 'Скрыть' : 'Галерея';
+                });
+            }
 
-                    if (gallery2.classList.contains('gallery-visible')) {
-                        toggleBtn2.textContent = 'Скрыть';
-                    } else {
-                        toggleBtn2.textContent = 'Галерея';
-                    }
+            // --- "Оживляем" кнопку для Проекта 3 ---
+            const toggleBtn3 = document.getElementById('project3-btn');
+            const gallery3 = document.getElementById('project3-gallery');
+
+            if (toggleBtn3 && gallery3) {
+                toggleBtn3.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    gallery3.classList.toggle('gallery-visible');
+                    toggleBtn3.textContent = gallery3.classList.contains('gallery-visible') ? 'Скрыть' : 'Галерея';
                 });
             }
         });
     </script>
-
 </body>
 </html>
