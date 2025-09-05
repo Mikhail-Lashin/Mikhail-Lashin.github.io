@@ -1,0 +1,406 @@
+<!--        ===============================================================        -->
+<!--        Подглядывать плохо!                                                    -->
+<!--        Эта страничка сверстана при помощи gemini 2.5 pro за два вечера,       -->
+<!--        поэтому не надо судить строго сей быдлокод                             -->
+
+<!--        (Сервер на rpi3 хостится)                                              -->
+<!--        ===============================================================        -->
+
+<!DOCTYPE html>
+<html lang="ru">
+
+<!-- подключение скрипта для галереи baguetteBox -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.css">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Портфолио инженерных проектов</title>
+    <style>
+        /* Общие стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 0;
+            background-color: #2c3e50;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        /* Стили блоков проектов */
+        .project {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .project:hover {
+            transform: translateY(-5px);
+        }
+        
+        .project-image {
+            width: 100%;
+            display: block;
+        }
+        
+        .project-content {
+            padding: 25px;
+        }
+        
+        .project-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .project-description {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        
+        .project-description ul, .project-description ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .project-description li {
+            margin-bottom: 5px;
+        }
+        
+        .bold {
+            font-weight: bold;
+        }
+        
+        .underline {
+            text-decoration: underline;
+        }
+        
+        .italic {
+            font-style: italic;
+        }
+        
+        /* Дополнительные медиаматериалы */
+        .additional-media {
+            display: grid; /* для матрицы из фото */
+            grid-template-columns: repeat(3, 1fr); /* 3 равные колонки */
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .media-item {
+            flex: 1 1 300px;
+            height: 200px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .media-item img, .media-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Ссылки проекта */
+        .project-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .project-link {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .project-link:hover {
+            background-color: #2980b9;
+        }
+        
+        /* Футер */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            background-color: #2c3e50;
+            color: white;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .project-image {
+                height: 300px;
+            }
+            
+            .media-item {
+                flex: 1 1 100%;
+            }
+            
+            .project-links {
+                flex-direction: column;
+            }
+        }
+        /* =============================================================== */
+        /* АДАПТИВНОСТЬ ДЛЯ БОЛЬШИХ ЭКРАНОВ (Две колонки)                  */
+        /* =============================================================== */
+        @media (min-width: 1024px) { /* Эти стили сработают, только если экран шире 1024px */
+
+            #project-list {
+                display: flex;      /* режим гибких колонок */
+                flex-wrap: wrap;    /* перенос проектов на новую строку */
+                gap: 40px;          /* отступ в 40px между проектами */
+            }
+
+            #project-list .project {
+                /* карточка проекта занимает половину ширины, 
+                   за вычетом половины отступа (40px / 2 = 20px) */
+                width: calc(50% - 20px); 
+                margin-bottom: 0; /* отступ снизу не нужен, т.к. есть gap */
+            }
+            
+        .add-space-top {
+            margin-top: 1.5em; /* добавить отступ сверху в 25 пикселей */
+        }
+
+        /* =============================================================== */
+        /* Стили для скрытой галереи                                       */
+        /* =============================================================== */
+
+        /* по умолчанию прячем галерею */
+        .additional-media {
+            /* убрать высоту и отступы */
+            max-height: 0;
+            overflow: hidden;
+            margin-top: 0;
+            margin-bottom: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            
+            /* плавный переход для всех свойств */
+            transition: all 0.7s ease-in-out;
+        }
+
+        /* этот класс будет добавляться через JS, чтобы показать галерею */
+        .additional-media.gallery-visible {
+            /* возвращаем высоту и отступы */
+            max-height: 1000px; /* большое значение, чтобы точно хватило */
+            margin: 20px 0;
+        }
+
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Мои проекты</h1>
+        </div>
+    </header>
+    
+    <div class="container" id="project-list">
+        <!-- СИСТЕМА ВИЗУАЛЬНОГО ПОЗИЦИОНИРОВАНИЯ -->
+        <div class="project">
+            <!-- Главное фото проекта -->
+            <img src="images\CV_main_render.JPG" alt="Низколатентная система визуального позиционирования" class="project-image">
+            <div class="project-content">
+                <h2 class="project-title">Низколатентная система визуального позиционирования</h2>
+                <div class="project-description">
+                    <p>
+                        <span class="bold underline">Задача:</span> разработать аппаратную систему, способную в реальном времени детектировать и отслеживать динамические цели на экране и управлять 2D-платформой на кинематике H-bot для точной корректировки движения компьютерной мыши. Тестовая среда — Aimlabs, CS2, Valorant.
+                    </p>
+                    
+
+                    <p class="bold add-space-top underline">Ключевые особенности:</p>
+                    <ul>
+                        <li><span class="bold">Аппаратная изоляция:</span> любое программное взаимодействие с хост-компьютером исключено</li>
+                        <li><span class="bold">CAD/CAE:</span> SolidWorks, Topological Optimization</li>
+                        <li><span class="bold">ПО:</span> C++, Python, OpenCV, Git</li>
+                        <li><span class="bold">Электроника:</span> Raspberry Pi 5, STM32, Stepper Motors</li>
+                        <li><span class="bold">Производство:</span> Лазерная резка (алюминий, сталь), 3D-печать</li>
+                    </ul>
+                </div>
+                
+                <div id="project1-gallery" class="additional-media">
+                    <a href="images/CV_photo.jpg" class="media-item">
+                        <img src="images/CV_photo.jpg" alt="Фото прототипа">
+                    </a>
+                    <a href="images/CV_main_render.jpg" class="media-item">
+                        <img src="images/CV_main_render.jpg" alt="Рендер">
+                    </a>
+                    <a href="images/CV_topological.png" class="media-item">
+                        <img src="images/CV_topological.png" alt="Топология">
+                    </a>
+                    <a href="images/CV_main_solid.png" class="media-item">
+                        <img src="images/CV_main_solid.png" alt="Скрин сборки">
+                    </a>
+                    <a href="images/CV_cymatics.png" class="media-item">
+                        <img src="images/CV_cymatics.png" alt="Кинематика">
+                    </a>
+                </div>
+                
+                <div class="project-links">
+                    <a href="#" id="project1-btn" class="project-link">Галерея</a>
+                    <a href="#" class="project-link">Видео с демонстрацией</a>
+                    <a href="#" class="project-link">GitHub (если будет)</a>
+                </div>
+            </div>
+        </div>
+        <!-- Конец проекта-->
+
+        <!-- ЛАЗЕРНЫЙ ГРАВЕР-->
+         <div class="project">
+            <!-- Главное фото проекта -->
+            <img src="images/CNC_photo.JPG" alt="Крупноформатный лазерный ЧПУ" class="project-image">
+            <div class="project-content">
+                <h2 class="project-title">Крупноформатный лазерный ЧПУ</h2>
+                <div class="project-description">
+                    <p>
+                        <span class="bold underline">Задача:</span> Спроектировать крупноформатный (800x800 мм) лазерный станок
+
+                    </p>
+                    
+
+                    <p class="bold add-space-top underline">Ключевые особенности:</p>
+                    <ul>
+                        <li><span class="bold">Кастомные узлы:</span> все ключевые компоненты (каретки, корпус для электроники и т.д.) спроектированы в Компас-3D и изготовлены методом FDM-печати для адаптации конструкции под выбранные комплектующие.</li>
+                        <li><span class="bold">Активная доработка:</span> ведется проектирование защитного корпуса со встроенной вытяжкой для повышения безопасности и расширения спектра обрабатываемых материалов.</li>
+                        <li><span class="bold">CAD:</span> Компас-3D</li>
+                        <li><span class="bold">Управление:</span> MKS DLC 32, GRBL, Nema 17</li>
+                        <li><span class="bold">ПО:</span> LightBurn, LaserGRBL</li>
+                        <li><span class="bold">Производство:</span> 3D-печать, слесарная сборка</li>
+                    </ul>
+                </div>
+                
+                <div id="project2-gallery" class="additional-media">
+                    <a href="images/CNC_photo.jpg" class="media-item">
+                        <img src="images/CNC_photo.jpg" alt="Фото готового станка">
+                    </a>
+                    <a href="images/CNC_main_render.jpg" class="media-item">
+                        <img src="images/CNC_main_render.jpg" alt="Общий рендер станка">
+                    </a>
+                    <a href="images/CNC_portal_render.jpg" class="media-item">
+                        <img src="images/CNC_portal_render.jpg" alt="Рендер портала">
+                    </a>
+                    <a href="images/CNC_laser_render.png" class="media-item">
+                        <img src="images/CNC_laser_render.png" alt="Рендер лазерной головки">
+                    </a>
+                    <a href="images/CNC_carriages.png" class="media-item">
+                        <img src="images/CNC_carriages.png" alt="Каретки осей">
+                    </a>
+                    <a href="images/CNC_circuit.png" class="media-item">
+                        <img src="images/CNC_circuit.png" alt="Схема электроники">
+                    </a>
+                    <a href="images/CNC_accuracy.jpg" class="media-item">
+                        <img src="images/CNC_accuracy.jpg" alt="Тест точности гравировки">
+                    </a>
+                    <a href="images/CNC_ros_robot.png" class="media-item">
+                        <img src="images/CNC_ros_robot.png" alt="Робот для ROS хакатона">
+                    </a>
+                </div>
+                
+                <div class="project-links">
+                    <a href="#" id="project2-btn" class="project-link">Галерея</a>
+                    <a href="https://vk.com/video507846758_456239096" target="_blank" class="project-link">Видео с демонстрацией</a>
+                    <a href="#" class="project-link">GitHub (если будет)</a>
+                </div>
+            </div>
+        </div>
+        <!-- Конец проекта-->
+        
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Михаил Лашин</p>
+            <p>Контакты: t9169648402@gmail.com</p>
+        </div>
+    </footer>
+
+<!-- =============================================================== -->
+<!-- ФИНАЛЬНЫЙ БЛОК СКРИПТОВ                                        -->
+<!-- =============================================================== -->
+
+    <!-- 1. Сначала подключаем библиотеку -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
+
+    <!-- 2. Затем пишем наш собственный код, который всё запускает -->
+    <script>
+        // Ждем, пока ЗАГРУЗИТСЯ ВСЯ СТРАНИЦА, включая все стили и скрипты
+        window.addEventListener('load', function() {
+            
+            // --- Сначала активируем галерею ---
+            // Эта команда найдет все галереи и сделает их кликабельными
+            baguetteBox.run('.additional-media', {
+                animation: 'fadeIn' // красивая анимация появления
+            });
+
+
+            // --- Теперь "оживляем" кнопку для Проекта 1 ---
+            const toggleBtn1 = document.getElementById('project1-btn');
+            const gallery1 = document.getElementById('project1-gallery');
+
+            if (toggleBtn1 && gallery1) {
+                toggleBtn1.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    
+                    gallery1.classList.toggle('gallery-visible');
+
+                    if (gallery1.classList.contains('gallery-visible')) {
+                        toggleBtn1.textContent = 'Скрыть';
+                    } else {
+                        toggleBtn1.textContent = 'Галерея';
+                    }
+                });
+            }
+
+            // --- Теперь "оживляем" кнопку для Проекта 2 ---
+            const toggleBtn2 = document.getElementById('project2-btn');
+            const gallery2 = document.getElementById('project2-gallery');
+
+            if (toggleBtn2 && gallery2) {
+                toggleBtn2.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    
+                    gallery2.classList.toggle('gallery-visible');
+
+                    if (gallery2.classList.contains('gallery-visible')) {
+                        toggleBtn2.textContent = 'Скрыть';
+                    } else {
+                        toggleBtn2.textContent = 'Галерея';
+                    }
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
