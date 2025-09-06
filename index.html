@@ -1,11 +1,3 @@
-<!--        ===============================================================        -->
-<!--        Подглядывать плохо!                                                    -->
-<!--        Эта страничка сверстана при помощи gemini 2.5 pro за два вечера,       -->
-<!--        поэтому не надо судить строго сей быдлокод                             -->
-
-<!--        (Сервер на rpi3 хостится)                                              -->
-<!--        ===============================================================        -->
-
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -17,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Портфолио инженерных проектов</title>
     <style>
+        /* ... (ВАШ CSS КОД ОСТАЕТСЯ БЕЗ ИЗМЕНЕНИЙ) ... */
         /* Общие стили */
         * {
             margin: 0;
@@ -244,7 +237,7 @@
                         <li><span class="bold">CAD:</span> SolidWorks</li>
                         <li><span class="bold">ПО:</span> C++, Python, OpenCV, Git, VScode</li>
                         <li><span class="bold">Электроника:</span> RPi 5, RPi camera, STM32, Nema 17, TMC2209</li>
-                        <li><span class="bold">Производство:</span> Лазерная резка (алюминий, сталь), 3D-печать</li>
+                        <li><span class="bold">Производство:</span> лазерная резка (алюминий, сталь), 3D-печать</li>
                     </ul>
                 </div>
                 
@@ -288,11 +281,10 @@
                     
                     <p class="bold add-space-top underline">Ключевые особенности:</p>
                     <ul>
-                        <li><span class="bold">Кастомные узлы:</span> все ключевые компоненты (каретки, корпус для электроники и т.д.) спроектированы в Компас-3D и изготовлены методом FDM-печати для адаптации конструкции под выбранные комплектующие.</li>
-                        <li><span class="bold">Активная доработка:</span> ведется проектирование защитного корпуса со встроенной вытяжкой для повышения безопасности и расширения спектра обрабатываемых материалов.</li>
+                        <li><span class="bold">Активная доработка:</span> ведется проектирование защитного корпуса со встроенной вытяжкой для повышения безопасности и расширения спектра обрабатываемых материалов (акрил, EVA и т.п.)</li>
                         <li><span class="bold">CAD:</span> Компас-3D (проектирование), SolidWorks (рендер)</li>
                         <li><span class="bold">ПО:</span> LightBurn, LaserGRBL</li>
-                        <li><span class="bold">Электроника:</span> MKS DLC 32, Nema 17, A4988</li>
+                        <li><span class="bold">Электроника:</span> Laser Module 10W 455nm, MKS DLC 32, Nema 17, A4988</li>
                         <li><span class="bold">Производство:</span> 3D-печать, слесарная сборка</li>
                     </ul>
                 </div>
@@ -333,6 +325,50 @@
         </div>
         <!-- Конец проекта-->
 
+        <!-- ВАЛ ПРИВОДНОЙ -->
+        <div class="project">
+            <!-- Главное фото проекта -->
+            <img src="images/DM_assembly_drawing.png" alt="Вал приводной" class="project-image">
+            <div class="project-content">
+                <h2 class="project-title">Вал приводной</h2>
+                <div class="project-description">
+                    <p>
+                        <span class="bold underline">Задача:</span> по предоставленному сборочному чертежу советского образца выполнить реверс-инжиниринг приводного вала (спроектировать сборку из 42 деталей и оформить частичный набор КД с указанием допусков и посадок)
+                    </p>
+                    <p class="bold add-space-top underline">Ключевые особенности:</p>
+                    <ul>
+                        <li><span class="bold">CAD:</span> Компас-3D</li>
+                    </ul>
+                    <ul>
+                        <li><span class="bold">Дополнительно:</span> библиотека "валы и механические передачи"</li>
+                    </ul>
+                    <ul>
+                        <li><span class="bold">Литература:</span> справочники Анурьева, Анухина, Курмаза </li>
+                    </ul>
+
+                </div>
+                
+                <div id="project3-gallery" class="additional-media">
+                    <a href="images/DM_1.png" class="media-item">
+                        <img src="images/DM_1.png" alt="3D-модель (вид 1)">
+                    </a>
+                    <a href="images/DM_2.png" class="media-item">
+                        <img src="images/DM_2.png" alt="3D-модель (вид 2)">
+                    </a>
+                    <a href="images/DM_3.png" class="media-item">
+                        <img src="images/DM_3.png" alt="3D-модель (вид 3)">
+                    </a>
+                </div>
+                
+                <div class="project-links">
+                    <a href="#" id="project3-btn" class="project-link">Галерея</a>
+                    <a href="images/DM_source.png" target="_blank" class="project-link">Исходный чертёж</a>
+                    <a href="images/DM_cd.pdf" target="_blank" class="project-link">КД (PDF)</a>
+                </div>
+            </div>
+        </div>
+        <!-- Конец проекта-->
+
         <!-- РОБОТ-ПОГРУЗЧИК -->
         <div class="project">
             <!-- Главное фото проекта -->
@@ -341,7 +377,7 @@
                 <h2 class="project-title">Робот-погрузчик</h2>
                 <div class="project-description">
                     <p>
-                        <span class="bold underline">Задача:</span> Создать миниатюрного робота-погрузчика для инженерных игр, способного распознавать цвет грузов, осуществлять их захват, перевозку и подъем на заданную высоту для сброса
+                        <span class="bold underline">Задача:</span> Создать миниатюрного робота-погрузчика для инженерных игр, способного распознавать цвет грузов, осуществлять их захват, перевозку и подъем на заданную высоту для сброса.
                     </p>
                     
                     <p class="bold add-space-top underline">Ключевые особенности:</p>
@@ -353,7 +389,7 @@
                     </ul>
                 </div>
                 
-                <div id="project3-gallery" class="additional-media">
+                <div id="project4-gallery" class="additional-media">
                     <a href="images/PP_photo.jpg" class="media-item">
                         <img src="images/PP_photo.jpg" alt="Фото робота">
                     </a>
@@ -378,7 +414,7 @@
                 </div>
                 
                 <div class="project-links">
-                    <a href="#" id="project3-btn" class="project-link">Галерея</a>
+                    <a href="#" id="project4-btn" class="project-link">Галерея</a>
                 </div>
             </div>
         </div>
@@ -413,7 +449,6 @@
             // --- "Оживляем" кнопку для Проекта 1 ---
             const toggleBtn1 = document.getElementById('project1-btn');
             const gallery1 = document.getElementById('project1-gallery');
-
             if (toggleBtn1 && gallery1) {
                 toggleBtn1.addEventListener('click', function(event) {
                     event.preventDefault();
@@ -425,7 +460,6 @@
             // --- "Оживляем" кнопку для Проекта 2 ---
             const toggleBtn2 = document.getElementById('project2-btn');
             const gallery2 = document.getElementById('project2-gallery');
-
             if (toggleBtn2 && gallery2) {
                 toggleBtn2.addEventListener('click', function(event) {
                     event.preventDefault();
@@ -434,15 +468,25 @@
                 });
             }
 
-            // --- "Оживляем" кнопку для Проекта 3 ---
+            // --- "Оживляем" кнопку для Проекта 3 (Вал приводной) ---
             const toggleBtn3 = document.getElementById('project3-btn');
             const gallery3 = document.getElementById('project3-gallery');
-
             if (toggleBtn3 && gallery3) {
                 toggleBtn3.addEventListener('click', function(event) {
                     event.preventDefault();
                     gallery3.classList.toggle('gallery-visible');
                     toggleBtn3.textContent = gallery3.classList.contains('gallery-visible') ? 'Скрыть' : 'Галерея';
+                });
+            }
+
+            // --- "Оживляем" кнопку для Проекта 4 (Робот-погрузчик) ---
+            const toggleBtn4 = document.getElementById('project4-btn');
+            const gallery4 = document.getElementById('project4-gallery');
+            if (toggleBtn4 && gallery4) {
+                toggleBtn4.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    gallery4.classList.toggle('gallery-visible');
+                    toggleBtn4.textContent = gallery4.classList.contains('gallery-visible') ? 'Скрыть' : 'Галерея';
                 });
             }
         });
