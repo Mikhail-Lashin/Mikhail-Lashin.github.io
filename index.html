@@ -161,6 +161,35 @@
                 flex-direction: column;
             }
         }
+        
+        /* =============================================================== */
+        /* Стили для статуса проекта                                      */
+        /* =============================================================== */
+
+        /* Общий стиль для всех статусов */
+        .project-status {
+            font-size: 0.9rem;      /* Чуть меньше основного текста */
+            font-style: italic;     /* Курсив, чтобы выделить */
+            font-weight: 500;
+            margin-top: -10px;      /* Немного подтянем к заголовку */
+            margin-bottom: 20px;    /* Дадим отступ до основного текста */
+        }
+
+        /* Модификатор для ЗАВЕРШЕННЫХ проектов (зеленый) */
+        .status-completed {
+            color: #28a745; /* Приятный зеленый цвет */
+        }
+
+        /* Модификатор для проектов В ПРОЦЕССЕ (синий) */
+        .status-in-progress {
+            color: #007bff; /* Профессиональный синий */
+        }
+
+        /* Модификатор для АРХИВНЫХ проектов (серый) */
+        .status-archived {
+            color: #6c757d; /* Нейтральный серый */
+        }
+
         /* =============================================================== */
         /* АДАПТИВНОСТЬ ДЛЯ БОЛЬШШИХ ЭКРАНОВ (Две колонки)                  */
         /* =============================================================== */
@@ -213,9 +242,8 @@
 <body>
     <header>
         <div class="container">
-            <h1>Мои проекты</h1>
-            <p>Лашин Михаил</p>
-            <p>НИЯУ МИФИ</p>
+            <h1>Портфолио</h1>
+            <p>Работы 2024-2025</p>
         </div>
     </header>
     
@@ -223,20 +251,22 @@
         <!-- СИСТЕМА ВИЗУАЛЬНОГО ПОЗИЦИОНИРОВАНИЯ -->
         <div class="project">
             <!-- Главное фото проекта -->
-            <img src="images/CV_main_render.JPG" alt="Низколатентная система визуального позиционирования" class="project-image">
+            <img src="images/CV_main_render.JPG" alt="Система визуального позиционирования" class="project-image">
             <div class="project-content">
-                <h2 class="project-title">Низколатентная система визуального позиционирования</h2>
+                <h2 class="project-title">Аппаратный аимбот для fps-шутеров</h2>
+                <p class="project-status status-in-progress">(Статус: в процессе)</p>
                 <div class="project-description">
                     <p>
-                        <span class="bold underline">Задача:</span> разработать аппаратную систему, способную в реальном времени детектировать и отслеживать динамические цели на экране и управлять 2D-платформой на кинематике H-bot для точной корректировки движения компьютерной мыши. Тестовая среда — Aimlabs, CS2, Valorant
+                        <span class="bold underline">Задача:</span> разработать невидимое для клиентского античита устройство, способное в реальном времени детектировать и отслеживать динамические цели на экране (в Aimlabs, CS2, Valorant) и управлять платформой на кинематике H-bot для корректировки движений компьютерной мыши
                     </p>
                     
                     <p class="bold add-space-top underline">Ключевые особенности:</p>
                     <ul>
                         <li><span class="bold">Аппаратная изоляция:</span> любое программное взаимодействие с хост-компьютером исключено</li>
+                        <li><span class="bold">Соотношение жесткость-инерция:</span> подвижные элементы облегчены методом топологической оптимизации</li>
                         <li><span class="bold">CAD:</span> SolidWorks</li>
                         <li><span class="bold">ПО:</span> C++, Python, OpenCV, Git, VScode</li>
-                        <li><span class="bold">Электроника:</span> RPi 5, RPi camera, STM32, Nema 17, TMC2209</li>
+                        <li><span class="bold">Электроника:</span> RPi 5, RPi camera, Nema 17, TMC2209</li>
                         <li><span class="bold">Производство:</span> лазерная резка (алюминий, сталь), 3D-печать</li>
                     </ul>
                 </div>
@@ -274,19 +304,21 @@
             <img src="images/CNC_photo.JPG" alt="Крупноформатный лазерный ЧПУ" class="project-image">
             <div class="project-content">
                 <h2 class="project-title">Крупноформатный лазерный ЧПУ</h2>
+                <p class="project-status status-completed">(Статус: завершено*)</p>
                 <div class="project-description">
                     <p>
-                        <span class="bold underline">Задача:</span> Спроектировать крупноформатный (800x800 мм) лазерный станок
+                        <span class="bold underline">Задача:</span> спроектировать с нуля и собрать крупноформатный (800x800 мм) лазерный станок
                     </p>
                     
                     <p class="bold add-space-top underline">Ключевые особенности:</p>
                     <ul>
-                        <li><span class="bold">Активная доработка:</span> ведется проектирование защитного корпуса со встроенной вытяжкой для повышения безопасности и расширения спектра обрабатываемых материалов (акрил, EVA и т.п.)</li>
                         <li><span class="bold">CAD:</span> Компас-3D (проектирование), SolidWorks (рендер)</li>
                         <li><span class="bold">ПО:</span> LightBurn, LaserGRBL</li>
                         <li><span class="bold">Электроника:</span> Laser Module 10W 455nm, MKS DLC 32, Nema 17, A4988</li>
                         <li><span class="bold">Производство:</span> 3D-печать, слесарная сборка</li>
                     </ul>
+
+                    <p class="project-status status-completed">*В дополнение к изначальной задаче ведется проектирование защитного корпуса со встроенной вытяжкой для повышения безопасности и расширения спектра обрабатываемых материалов (акрил, EVA и т.п.)</p>
                 </div>
                 
                 <div id="project2-gallery" class="additional-media">
@@ -331,6 +363,7 @@
             <img src="images/DM_assembly_drawing.png" alt="Вал приводной" class="project-image">
             <div class="project-content">
                 <h2 class="project-title">Вал приводной</h2>
+                <p class="project-status status-completed">(Статус: завершено)</p>
                 <div class="project-description">
                     <p>
                         <span class="bold underline">Задача:</span> по предоставленному сборочному чертежу советского образца выполнить реверс-инжиниринг приводного вала (спроектировать сборку из 42 деталей и оформить частичный набор КД с указанием допусков и посадок)
@@ -375,9 +408,10 @@
             <img src="images/PP_compas_1.png" alt="Робот-погрузчик" class="project-image">
             <div class="project-content">
                 <h2 class="project-title">Робот-погрузчик</h2>
+                <p class="project-status status-completed">(Статус: завершено)</p>
                 <div class="project-description">
                     <p>
-                        <span class="bold underline">Задача:</span> Создать миниатюрного робота-погрузчика для инженерных игр, способного распознавать цвет грузов, осуществлять их захват, перевозку и подъем на заданную высоту для сброса.
+                        <span class="bold underline">Задача:</span> создать миниатюрного робота-погрузчика для инженерных игр, способного распознавать цвет грузов, осуществлять их захват, перевозку и подъем на заданную высоту для сброса.
                     </p>
                     
                     <p class="bold add-space-top underline">Ключевые особенности:</p>
